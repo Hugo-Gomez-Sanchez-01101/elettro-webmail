@@ -134,6 +134,11 @@ Navegador (SPA)  ──HTTP/JSON──►  Backend Express (server.js)  ──SM
   que se **recrea por cada correo** para evitar el quirk de `srcdoc` en Chromium que impedía
   recargar el contenido. El texto se escapa con `escapeHtml`.
 
+> 📘 **¿Quieres el detalle completo?** En [`BACKEND.md`](BACKEND.md) hay una explicación
+> técnica extensa del backend, a alto y bajo nivel (TCP/puertos, async/await, middlewares,
+> los diálogos reales de SMTP y POP3 comando a comando, MIME, sesiones...), pensada para
+> quien lleva alrededor de un año programando.
+
 ## Licencia
 
 MIT
