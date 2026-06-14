@@ -143,6 +143,19 @@ function showRead() {
 
 let currentMsg = null;
 
+// Renderiza el cuerpo creando SIEMPRE un iframe nuevo. Reutilizar el mismo
+// iframe y reasignar srcdoc no recarga el contenido de forma fiable en
+// Chromium (por eso antes solo se veía el primer correo abierto).
+function renderBody(html) {
+  const wrap = $('read-body-wrap');
+  wrap.innerHTML = '';
+  const iframe = document.createElement('iframe');
+  iframe.className = 'read-body';
+  iframe.setAttribute('sandbox', ''); // sin ejecución de scripts
+  wrap.appendChild(iframe);
+  iframe.srcdoc = html;
+}
+
 async function openMessage(num) {
   showRead();
   $('read-subject').textContent = 'Cargando…';
@@ -150,7 +163,7 @@ async function openMessage(num) {
   $('read-date').textContent = '';
   $('read-to').textContent = '';
   $('read-attachments').innerHTML = '';
-  $('read-body').srcdoc = '';
+  $('read-body-wrap').innerHTML = '';
   try {
     const m = await api('/api/messages/' + num);
     currentMsg = m;
@@ -168,8 +181,9 @@ async function openMessage(num) {
     const body = m.html
       ? m.html
       : '<pre style="white-space:pre-wrap;font-family:inherit">' + escapeHtml(m.text) + '</pre>';
-    $('read-body').srcdoc =
-      '<base target="_blank"><style>body{font-family:Arial,sans-serif;color:#202124;margin:16px}</style>' + body;
+    renderBody(
+      '<base target="_blank"><style>body{font-family:Arial,sans-serif;color:#202124;margin:16px}</style>' + body
+    );
   } catch (err) {
     $('read-subject').textContent = 'Error: ' + err.message;
   }

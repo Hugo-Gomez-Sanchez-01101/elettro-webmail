@@ -65,7 +65,9 @@
             <div id="read-to" class="read-to"></div>
           </div>
           <div id="read-attachments" class="read-attachments"></div>
-          <iframe id="read-body" class="read-body" sandbox=""></iframe>
+          <!-- El iframe del cuerpo se (re)crea en JS por cada correo para evitar
+               el quirk de srcdoc que impedía recargar el contenido. -->
+          <div id="read-body-wrap" class="read-body-wrap"></div>
         </section>
       </main>
     </div>

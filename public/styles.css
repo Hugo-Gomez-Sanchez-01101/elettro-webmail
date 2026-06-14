@@ -178,7 +178,8 @@ body {
   font-size: 13px;
   background: var(--hover);
 }
-.read-body { width: 100%; min-height: 60vh; border: none; padding: 0 20px; background: #fff; }
+.read-body-wrap { padding: 0 20px; }
+.read-body { width: 100%; min-height: 60vh; border: none; background: #fff; display: block; }
 
 .icon-btn {
   background: none;
