@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elettro Webmail</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>" />
+</head>
+<body>
+
+  <!-- Pantalla de login -->
+  <div id="login-screen" class="login-screen">
+    <form id="login-form" class="login-card">
+      <div class="login-logo">✉️</div>
+      <h1>Elettro Webmail</h1>
+      <p class="login-sub">mail.elettrorava.es</p>
+      <input type="email" id="login-email" placeholder="correo@elettrorava.es" autocomplete="username" required />
+      <input type="password" id="login-password" placeholder="Contraseña" autocomplete="current-password" required />
+      <button type="submit" id="login-btn">Entrar</button>
+      <div id="login-error" class="login-error"></div>
+    </form>
+  </div>
+
+  <!-- App principal -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="brand"><span class="logo">✉️</span> Elettro <b>Webmail</b></div>
+      <input type="search" id="search" class="search" placeholder="Buscar en el correo" />
+      <div class="topbar-right">
+        <span id="user-email" class="user-email"></span>
+        <button id="logout-btn" class="icon-btn" title="Cerrar sesión">Salir</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <button id="compose-btn" class="compose-btn">✏️ Redactar</button>
+        <nav class="folders">
+          <a class="folder active"><span>📥</span> Recibidos <b id="inbox-count"></b></a>
+        </nav>
+        <button id="refresh-btn" class="refresh-btn">🔄 Actualizar</button>
+      </aside>
+
+      <main class="content">
+        <!-- Lista de mensajes -->
+        <section id="list-view" class="list-view">
+          <div id="list-status" class="list-status">Cargando…</div>
+          <ul id="message-list" class="message-list"></ul>
+        </section>
+
+        <!-- Lectura de un mensaje -->
+        <section id="read-view" class="read-view hidden">
+          <div class="read-toolbar">
+            <button id="back-btn" class="icon-btn">← Volver</button>
+            <button id="reply-btn" class="icon-btn">↩ Responder</button>
+            <button id="delete-btn" class="icon-btn danger">🗑 Eliminar</button>
+          </div>
+          <div class="read-header">
+            <h2 id="read-subject"></h2>
+            <div class="read-meta">
+              <span id="read-from" class="read-from"></span>
+              <span id="read-date" class="read-date"></span>
+            </div>
+            <div id="read-to" class="read-to"></div>
+          </div>
+          <div id="read-attachments" class="read-attachments"></div>
+          <iframe id="read-body" class="read-body" sandbox=""></iframe>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal de redacción -->
+  <div id="compose-modal" class="compose-modal hidden">
+    <div class="compose-window">
+      <div class="compose-head">
+        <span>Mensaje nuevo</span>
+        <button id="compose-close" class="icon-btn">✕</button>
+      </div>
+      <form id="compose-form" class="compose-body">
+        <input type="text" id="c-to" placeholder="Para" required />
+        <input type="text" id="c-cc" placeholder="CC (opcional)" />
+        <input type="text" id="c-subject" placeholder="Asunto" />
+        <textarea id="c-body" placeholder="Escribe tu mensaje…"></textarea>
+        <div class="compose-foot">
+          <button type="submit" id="c-send" class="send-btn">Enviar</button>
+          <span id="compose-status" class="compose-status"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

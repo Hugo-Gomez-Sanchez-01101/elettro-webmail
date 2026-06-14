@@ -1,0 +1,32 @@
+{
+  "name": "elettro-webmail",
+  "version": "1.0.0",
+  "description": "Cliente de correo web portable (estilo Gmail ligero) para mail.elettrorava.es vía SMTP:25 y POP3:110 sin TLS/SSL.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "build:exe": "pkg . --targets node18-win-x64 --output dist/elettro-webmail.exe"
+  },
+  "bin": "server.js",
+  "pkg": {
+    "assets": [
+      "public/**/*"
+    ]
+  },
+  "keywords": [
+    "webmail",
+    "smtp",
+    "pop3",
+    "email",
+    "portable"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mailparser": "^3.7.2",
+    "nodemailer": "^6.9.16",
+    "node-pop3": "^0.9.0"
+  }
+}
